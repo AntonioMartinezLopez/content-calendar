@@ -1,7 +1,7 @@
 package dev.aml.contentcalendar.controller;
 
 import dev.aml.contentcalendar.model.Content;
-import dev.aml.contentcalendar.repository.ContentCollectionRepository;
+import dev.aml.contentcalendar.repository.ContentRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @RequestMapping("/api/content")
 @CrossOrigin
 public class ContentController {
-    private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
     // implicit, no need for autowired with one contructor
     @Autowired
-    public ContentController(ContentCollectionRepository repository) {
+    public ContentController(ContentRepository repository) {
         this.repository = repository;
     }
 
@@ -50,7 +50,7 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
 }
