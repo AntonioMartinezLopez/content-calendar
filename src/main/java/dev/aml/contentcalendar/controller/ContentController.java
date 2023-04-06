@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import dev.aml.contentcalendar.model.Status;
 
 @RestController
 @RequestMapping("/api/content")
@@ -52,5 +53,15 @@ public class ContentController {
     public void delete(@PathVariable Integer id) {
         repository.deleteById(id);
     }
+
+    @GetMapping("filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword){
+        return repository.findAllByTitleContains(keyword);
+    }
+
+    @GetMapping("/filter/status/{status}")
+    List<Content> listByStatus(@PathVariable Status status){
+        return repository.listByStatus(status);
+    };
 
 }

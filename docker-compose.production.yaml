@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  springboot:
+    image: content-calendar:0.0.1-SNAPSHOT
+    environment:
+      SPRING_PROFILES_ACTIVE: production
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: content
+      PGUSER: postgres
+      PGPASSWORD: password
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: content
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
